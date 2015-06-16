@@ -54,3 +54,20 @@ return(v)
 
 ex_vec <- c(4, 8, 15, 16, 23, 42)
 total(ex_vec)
+
+## Split-Apply-Combine Functions
+# Challenge 1
+# A: 3 or all apart from 2
+
+# Challenge 2
+
+lifeExp <- function(data, variables){
+df <- ddply(
+      .data = data,
+      .variables = variables,
+      .fun = function(x){mean(x$lifeExp)})
+rename(df, c("V1" = "lifeExp"))
+}
+expectency <- lifeExp(gapminder, variables = c("continent", "year"))
+
+
