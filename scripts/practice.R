@@ -43,3 +43,14 @@ outside <- function(v){
 }
 dry_principle <- c("Don't", "repeat", "yourself", "or", "others")
 outside(dry_principle)
+
+# Challenge - Using Loops
+total <- function(x){
+v <- 0
+  for (i in x){
+v <- v + i}
+return(v)
+}
+
+ex_vec <- c(4, 8, 15, 16, 23, 42)
+total(ex_vec)
