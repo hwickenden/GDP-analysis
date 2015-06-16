@@ -60,14 +60,40 @@ total(ex_vec)
 # A: 3 or all apart from 2
 
 # Challenge 2
-
+## Calculate the life expectency by variable(s)
 lifeExp <- function(data, variables){
-df <- ddply(
-      .data = data,
-      .variables = variables,
-      .fun = function(x){mean(x$lifeExp)})
-rename(df, c("V1" = "lifeExp"))
+  df <- ddply(
+        .data = data,
+        .variables = variables,
+        .fun = function(x){mean(x$lifeExp)})
+  rename(df, c("V1" = "lifeExp"))
 }
 expectency <- lifeExp(gapminder, variables = c("continent", "year"))
+
+# Advanced Challenge
+## Calculate the difference between min and max life expectency over time period, by variable(s)
+lifeExpDiff <- function(data, variables){
+  
+  df1 <- ddply(
+    .data = data,
+    .variables = variables,
+    .fun = function(x){mean(x$lifeExp)})
+  
+  df2 <- ddply(
+    .data = df1,
+    .variables = c("continent"),
+    .fun = function(y){
+      max(y$V1) - min(y$V1)
+    }
+  )
+  
+  rename(df2, c("V1" = "lifeExpDiff"))
+}
+
+expDiff<-lifeExpDiff(gapminder, variables=c("continent", "year"))
+
+
+
+
 
 
